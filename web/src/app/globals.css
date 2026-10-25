@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-amber-400 to-amber-500 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-sm shadow-amber-500/25 transition hover:from-amber-300 hover:to-amber-400 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-800 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-500 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-ghost-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-800 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10;
+  }
+  .input-dark {
+    @apply w-full rounded-xl border border-zinc-700 bg-zinc-900 px-3.5 py-2.5 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500;
+  }
+  .label-dark {
+    @apply mb-1.5 block text-xs font-bold uppercase tracking-wide text-zinc-400;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold;
+  }
+  .th {
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-slate-500;
+  }
+  .tdd {
+    @apply px-4 py-3 text-sm text-slate-700;
+  }
+}
+
+/* Scrollbar halus */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.55);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animasi */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-rise {
+  animation: rise 0.25s ease-out both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-pop {
+  animation: pop 0.18s ease-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fadein {
+  animation: fadeIn 0.15s ease-out both;
+}
+
+/* ===== Animasi halaman login ===== */
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5%, -7%, 0) scale(1.1); }
+}
+.login-blob {
+  animation: drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes loginIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.login-in {
+  animation: loginIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+/* Chip fitur: entrance + float digabung dalam satu deklarasi (animation bukan properti aditif) */
+.login-chip {
+  animation: loginIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both, chipFloat 5s ease-in-out infinite;
+}
+
+@keyframes sheen {
+  0% { transform: translateX(-130%) skewX(-14deg); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateX(320%) skewX(-14deg); opacity: 0; }
+}
+.login-sheen {
+  animation: sheen 7s ease-in-out 2.5s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.45); }
+  50% { box-shadow: 0 12px 40px -8px rgba(245, 158, 11, 0.8); }
+}
+.login-glow {
+  animation: glowPulse 3.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-blob, .login-in, .login-chip, .login-sheen, .login-glow {
+    animation: none;
+  }
+}
+
+/* ===== Skeleton loading ===== */
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.skeleton {
+  border-radius: 0.5rem;
+  background: linear-gradient(100deg, #e8ecf1 32%, #f7f9fb 50%, #e8ecf1 68%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+.skeleton-dark {
+  border-radius: 0.5rem;
+  background: linear-gradient(100deg, #27272a 32%, #3f3f46 50%, #27272a 68%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+/* ===== Transisi antar halaman ===== */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-pagein {
+  animation: pageIn 0.28s ease-out both;
+}
+/* Penting: bersihkan transform setelah animasi — transform di leluhur menjebak
+   position:fixed (modal tidak lagi menempel viewport & ikut ke-scroll) */
+.animate-pagein:has(.z-\[100\]) {
+  animation: pageIn 0.28s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton, .skeleton-dark, .animate-pagein {
+    animation: none;
+  }
+}
+
+/* Cetak struk: hanya area struk yang terlihat.
+   Leluhur struk DINETRALKAN saat cetak — modal punya backdrop-blur (menjadi
+   containing block bagi position:fixed) + overflow-hidden + max-h-[80vh],
+   yang memotong bagian bawah struk saat dicetak (subtotal/total/kembalian
+   hilang) bila modal ter-scroll / viewport pendek. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receipt-print,
+  .receipt-print * {
+    visibility: visible;
+  }
+  /* Elemen lain di-display:none (bukan sekadar hidden) supaya keluar dari
+     alur cetak — dokumen tingginya = tinggi struk, tanpa halaman kosong. */
+  body *:not(.receipt-print):not(.receipt-print *):not(:has(.receipt-print)) {
+    display: none !important;
+  }
+  *:has(.receipt-print) {
+    position: static !important;
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    animation: none !important;
+  }
+  .receipt-print {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
